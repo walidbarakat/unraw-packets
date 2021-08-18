@@ -4,13 +4,13 @@ through my work on a private project i found my self in a situation where i need
 this library written in C to support as many low level use cases as possible, as initial i provided the library in two files as header and source file.
 
 currently this library is supporting :
-layer 2:
-- Ethernet
+- layer 2:
+ - Ethernet
 
-layer 3:
-- IPv{4,6}
-- ICMPv{4,6}
+- layer 3:
+ - IPv{4,6}
+ - ICMPv{4,6}
 
-layer 4:
-- TCP
-- UDP
+- layer 4:
+ - TCP
+ - UDP
