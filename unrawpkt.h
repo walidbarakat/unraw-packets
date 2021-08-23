@@ -1,36 +1,56 @@
 #include <linux/if_ether.h>
+
 #include <linux/ip.h>
 #include <linux/ipv6.h>
+
 #include <linux/icmp.h>
 #include <linux/icmpv6.h>
+
 #include <linux/tcp.h>
 #include <linux/udp.h>
 
 #include <linux/in.h>
 
-unsigned char *pkt;
+unsigned char *raw_pkt;
+struct ethhdr eth;
+
+struct iphdr ip;
+struct ipv6hdr ip6;
+
+struct icmphdr icmp;
+struct icmpv6hdr icmp6;
+
+struct tcphdr tcp;
+struct udphdr udp;
 
 void packet_recv(unsigned char buffer[65536]);
 
 /*
  * layer 2
  */
-struct ethhdr extract_eth_hdr(unsigned char *raw_pkt);
+void extract_eth_hdr(unsigned char *raw_pkt);
+struct ethhdr get_eth_hdr();
 
 /*
  * layer 3
  */
-struct iphdr extract_ipv4_hdr(unsigned char *raw_pkt);
+void extract_ipv4_hdr(unsigned char *raw_pkt);
+struct iphdr get_ipv4_hdr();
 
-struct ipv6hdr extract_ipv6_hdr(unsigned char *raw_pkt);
+void extract_ipv6_hdr(unsigned char *raw_pkt);
+struct ipv6hdr get_ipv6_hdr();
 
-struct icmphdr extract_icmpv4_hdr(unsigned char *raw_pkt);
+void extract_icmpv4_hdr(unsigned char *raw_pkt);
+struct icmphdr get_icmpv4_hdr();
 
-struct icmpv6hdr extract_icmpv6_hdr(unsigned char *raw_pkt);
+void extract_icmpv6_hdr(unsigned char *raw_pkt);
+struct icmpv6hdr get_icmpv6_hdr();
 
 /*
  * layer 4
  */
-struct tcphdr extract_tcp_hdr(unsigned char *raw_pkt);
+void extract_tcp_hdr(unsigned char *raw_pkt);
+struct tcphdr get_tcp_hdr();
 
-struct udphdr extract_udp_hdr(unsigned char *raw_pkt);
+void extract_udp_hdr(unsigned char *raw_pkt);
+struct udphdr get_udp_hdr();
