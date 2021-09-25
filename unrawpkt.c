@@ -14,28 +14,28 @@ struct ethhdr get_eth_hdr() {
  * layer 3
  */
 void extract_ipv4_hdr(unsigned char *raw_pkt) {
-    &ip = (struct iphdr *)( buffer + sizeof(struct ethhdr) );
+    &ip = (struct iphdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct iphdr get_ipv4_hdr() {
     return ip;
 }
 
 void extract_ipv6_hdr(unsigned char *raw_pkt) {
-    &ip6 = (struct ipv6hdr *)( buffer + sizeof(struct ethhdr) );
+    &ip6 = (struct ipv6hdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct ipv6hdr get_ipv6_hdr() {
     return ip6;
 }
 
 void extract_icmpv4_hdr(unsigned char *raw_pkt) {
-
+    &icmphdr = (struct icmphdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct icmphdr get_icmpv4_hdr() {
     return icmp;
 }
 
 void extract_icmpv6_hdr(unsigned char *raw_pkt) {
-
+    &icmpv6hdr = (struct icmpv6hdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct icmpv6hdr get_icmpv6_hdr() {
     return icmp6;
