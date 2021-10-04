@@ -15,6 +15,8 @@ unsigned char *raw_pkt;
 struct ethhdr eth;
 
 struct iphdr ip;
+unsigned short iph4drlen;
+
 struct ipv6hdr ip6;
 
 struct icmphdr icmp;

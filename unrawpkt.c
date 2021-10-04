@@ -15,6 +15,7 @@ struct ethhdr get_eth_hdr() {
  */
 void extract_ipv4_hdr(unsigned char *raw_pkt) {
     &ip = (struct iphdr*)( buffer + sizeof(struct ethhdr) );
+    iph4drlen = ip->ihl*4;
 }
 struct iphdr get_ipv4_hdr() {
     return ip;
@@ -45,14 +46,14 @@ struct icmpv6hdr get_icmpv6_hdr() {
  * layer 4
  */
 void extract_tcp_hdr(unsigned char *raw_pkt) {
-
+    &tcp = (struct tcphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
 }
 struct tcphdr get_tcp_hdr() {
     return tcp;
 }
 
 void extract_udp_hdr(unsigned char *raw_pkt) {
-
+     &udp = (struct udphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
 }
 struct udphdr get_udp_hdr() {
     return udp
