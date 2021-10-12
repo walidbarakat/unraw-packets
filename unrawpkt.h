@@ -11,7 +11,7 @@
 
 #include <linux/in.h>
 
-unsigned char *raw_pkt;
+uint8_t* pkt;
 struct ethhdr eth;
 
 struct iphdr ip;
@@ -25,27 +25,29 @@ struct icmpv6hdr icmp6;
 struct tcphdr tcp;
 struct udphdr udp;
 
-void packet_recv(unsigned char buffer[65536]);
+void packet_recv(uint8_t* raw_pkt);
 
 /*
  * layer 2
  */
-void extract_eth_hdr(unsigned char *raw_pkt);
+void extract_eth_hdr(uint8_t* raw_pkt);
 struct ethhdr get_eth_hdr();
+
+bool isIPHDR(struct ethhdr eth);
 
 /*
  * layer 3
  */
-void extract_ipv4_hdr(unsigned char *raw_pkt);
+void extract_ipv4_hdr(uint8_t* raw_pkt);
 struct iphdr get_ipv4_hdr();
 
-void extract_ipv6_hdr(unsigned char *raw_pkt);
+void extract_ipv6_hdr(uint8_t* raw_pkt);
 struct ipv6hdr get_ipv6_hdr();
 
-void extract_icmpv4_hdr(unsigned char *raw_pkt);
+void extract_icmpv4_hdr(uint8_t* raw_pkt);
 struct icmphdr get_icmpv4_hdr();
 
-void extract_icmpv6_hdr(unsigned char *raw_pkt);
+void extract_icmpv6_hdr(uint8_t* raw_pkt);
 struct icmpv6hdr get_icmpv6_hdr();
 
 /*

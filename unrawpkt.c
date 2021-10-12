@@ -1,4 +1,21 @@
+#include <linux/if_ether.h>
+
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+
+#include <linux/icmp.h>
+#include <linux/icmpv6.h>
+
+#include <linux/tcp.h>
+#include <linux/udp.h>
+
+#include <linux/in.h>
+
 #include <unrawpkt.h>
+
+void packet_recv(uint8_t* raw_pkt) {
+    *pkt = *raw_pkt;
+}
 
 /*
  * layer 2
@@ -8,6 +25,12 @@ void extract_eth_hdr(unsigned char *raw_pkt) {
 }
 struct ethhdr get_eth_hdr() {
     return eth;
+}
+
+bool isIPHDR(struct ethhdr eth) {
+    if(eth->h_proto == ETH_P_IP) return true;
+
+    return false;
 }
 
 /*
