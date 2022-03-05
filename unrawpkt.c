@@ -14,7 +14,7 @@
 #include <unrawpkt.h>
 
 void packet_recv(uint8_t* raw_pkt) {
-    *pkt = *raw_pkt;
+    pkt = raw_pkt;
 }
 
 /*
@@ -28,56 +28,54 @@ struct ethhdr get_eth_hdr() {
 }
 
 bool isIPHDR(struct ethhdr eth) {
-    if(eth->h_proto == ETH_P_IP) return true;
-
-    return false;
+    return (eth->h_proto == ETH_P_IP)? true : false;
 }
 
 /*
  * layer 3
  */
 void extract_ipv4_hdr(unsigned char *raw_pkt) {
-    &ip = (struct iphdr*)( buffer + sizeof(struct ethhdr) );
+    ip = (struct iphdr*)( buffer + sizeof(struct ethhdr) );
     iph4drlen = ip->ihl*4;
 }
 struct iphdr get_ipv4_hdr() {
-    return ip;
+    return *ip;
 }
 
 void extract_ipv6_hdr(unsigned char *raw_pkt) {
-    &ip6 = (struct ipv6hdr*)( buffer + sizeof(struct ethhdr) );
+    ip6 = (struct ipv6hdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct ipv6hdr get_ipv6_hdr() {
-    return ip6;
+    return *ip6;
 }
 
 void extract_icmpv4_hdr(unsigned char *raw_pkt) {
-    &icmphdr = (struct icmphdr*)( buffer + sizeof(struct ethhdr) );
+    icmphdr = (struct icmphdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct icmphdr get_icmpv4_hdr() {
-    return icmp;
+    return *icmp;
 }
 
 void extract_icmpv6_hdr(unsigned char *raw_pkt) {
-    &icmpv6hdr = (struct icmpv6hdr*)( buffer + sizeof(struct ethhdr) );
+    icmpv6hdr = (struct icmpv6hdr*)( buffer + sizeof(struct ethhdr) );
 }
 struct icmpv6hdr get_icmpv6_hdr() {
-    return icmp6;
+    return *icmp6;
 }
 
 /*
  * layer 4
  */
 void extract_tcp_hdr(unsigned char *raw_pkt) {
-    &tcp = (struct tcphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
+    tcp = (struct tcphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
 }
 struct tcphdr get_tcp_hdr() {
-    return tcp;
+    return *tcp;
 }
 
 void extract_udp_hdr(unsigned char *raw_pkt) {
-     &udp = (struct udphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
+     udp = (struct udphdr*)( buffer + iph4drlen + sizeof(struct ethhdr));
 }
 struct udphdr get_udp_hdr() {
-    return udp
+    return *udp
 }

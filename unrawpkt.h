@@ -12,18 +12,19 @@
 #include <linux/in.h>
 
 uint8_t* pkt;
-struct ethhdr eth;
 
-struct iphdr ip;
+struct ethhdr* eth;
+
+struct iphdr* ip;
 unsigned short iph4drlen;
 
-struct ipv6hdr ip6;
+struct ipv6hdr* ip6;
 
-struct icmphdr icmp;
-struct icmpv6hdr icmp6;
+struct icmphdr* icmp;
+struct icmpv6hdr* icmp6;
 
-struct tcphdr tcp;
-struct udphdr udp;
+struct tcphdr* tcp;
+struct udphdr* udp;
 
 void packet_recv(uint8_t* raw_pkt);
 
